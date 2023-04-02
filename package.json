@@ -15,7 +15,6 @@
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "pinia": "^2.0.33",
-    "sweet-modal-vue": "^2.0.0",
     "vue": "^3.2.47",
     "vue-final-modal": "^4.1.4",
     "vue-router": "^4.1.6",
