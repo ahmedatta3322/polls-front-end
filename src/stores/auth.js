@@ -9,10 +9,13 @@ export const useAuthStore = defineStore({
   }),
   actions: {
     async userLogin(username, password) {
-      this.isAuthenticated = await axios.post('http://localhost:8000/api/login/', {
-        username: username,
-        password: password
-      })
+      this.isAuthenticated = await axios.post(
+        'http://ahmedatta3322.pythonanywhere.com/api/login/',
+        {
+          username: username,
+          password: password
+        }
+      )
       if (this.isAuthenticated.status == 200) {
         sessionStorage.setItem('access_token', this.isAuthenticated.data.access)
         sessionStorage.setItem('refresh_token', this.isAuthenticated.data.refresh)
@@ -27,7 +30,7 @@ export const useAuthStore = defineStore({
       let token = sessionStorage.getItem('access_token')
       if (token) {
         this.isAuthenticated = (
-          await axios.post('http://localhost:8000/api/verify/', { token: token })
+          await axios.post('http://ahmedatta3322.pythonanywhere.com/api/verify/', { token: token })
         ).status
         if (this.isAuthenticated == 200) {
           this.isAuthenticated = true
@@ -39,10 +42,13 @@ export const useAuthStore = defineStore({
       }
     },
     async userRegister(username, password) {
-      this.isAuthenticated = await axios.post('http://localhost:8000/api/register/', {
-        username: username,
-        password: password
-      })
+      this.isAuthenticated = await axios.post(
+        'http://ahmedatta3322.pythonanywhere.com/api/register/',
+        {
+          username: username,
+          password: password
+        }
+      )
       if (this.isAuthenticated.status == 201) {
         sessionStorage.setItem('access_token', this.isAuthenticated.data.access_token)
         sessionStorage.setItem('refresh_token', this.isAuthenticated.data.refresh_token)

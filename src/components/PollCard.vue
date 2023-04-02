@@ -48,7 +48,7 @@ export default {
     methods: {
         vote() {
           console.log(this.$el)
-          axios.post("http://localhost:8000/api/vote/", {
+          axios.post("http://ahmedatta3322.pythonanywhere.com/api/vote/", {
             choice : this.$el.querySelector('input[type="radio"]:checked').value,
             poll: this.poll.id
           }, {
