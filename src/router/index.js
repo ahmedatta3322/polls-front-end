@@ -27,6 +27,11 @@ const router = createRouter({
       component: Login
     },
     {
+      path: '/admincharts',
+      name: 'AdminCharts',
+      component: () => import('../views/AdminCharts.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('../views/NotFound.vue')
@@ -35,7 +40,6 @@ const router = createRouter({
 })
 router.beforeEach((to) => {
   let auth = useAuthStore().verifyAuth()
-
   return auth
     .then(() => {
       if (!useAuthStore().isAuthenticated) {
@@ -44,7 +48,7 @@ router.beforeEach((to) => {
         }
         if (to.path == '/adminlogin') {
           return true
-        } else if (to.path == '/adminportal') {
+        } else if (to.path == '/adminportal' || to.path == '/admincharts') {
           return { name: 'AdminLogin' }
         } else {
           return { name: 'Login' }
@@ -62,6 +66,9 @@ router.beforeEach((to) => {
     })
     .catch(() => {
       if (to.path == '/login') {
+        return true
+      }
+      if (to.path == '/adminlogin') {
         return true
       } else {
         return { name: 'Login' }

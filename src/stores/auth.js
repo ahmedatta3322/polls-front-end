@@ -23,7 +23,8 @@ export const useAuthStore = defineStore({
         this.isAuthenticated = true
       } else {
         this.isAuthenticated = false
-        alert('Invalid Credentials')
+        let message = this.isAuthenticated.data.detail
+        $toast.error(message)
       }
     },
     async verifyAuth() {
@@ -46,13 +47,15 @@ export const useAuthStore = defineStore({
         'http://ahmedatta3322.pythonanywhere.com/api/register/',
         {
           username: username,
-          password: password
+          password: password,
+          is_staff: true
         }
       )
       if (this.isAuthenticated.status == 201) {
         sessionStorage.setItem('access_token', this.isAuthenticated.data.access_token)
         sessionStorage.setItem('refresh_token', this.isAuthenticated.data.refresh_token)
         this.isAuthenticated = true
+        this.isAdminAuthenticated = true
       } else {
         this.isAuthenticated = false
       }
@@ -62,6 +65,13 @@ export const useAuthStore = defineStore({
     },
     adminLogout() {
       this.isAdminAuthenticated = false
+      sessionStorage.removeItem('access_token')
+      sessionStorage.removeItem('refresh_token')
+    },
+    userLogout() {
+      this.isAuthenticated = false
+      sessionStorage.removeItem('access_token')
+      sessionStorage.removeItem('refresh_token')
     },
     verifyAdminAuth(isauth) {
       this.isAdminAuthenticated = isauth

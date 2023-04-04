@@ -1,8 +1,9 @@
 <script setup>
 import Login from '../components/Login.vue'
+import "../assets/css/login.css"
 </script>
 <template>
-  <div class="public">
+  <div class="login-vue">
     <Login :isAdmin="isAdmin" />
   </div>
 </template>
@@ -20,15 +21,3 @@ export default {
   },
   }
 </script>
-<style scoped>
-.public {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 30vw;
-  grid-column-start: 2;
-  grid-column-end: 3; 
-}
-
-
-</style>

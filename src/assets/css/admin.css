@@ -1,0 +1,136 @@
+.solid {
+  border-top: 3px solid black;
+  width: 100%;
+  padding: 0 0 0 0;
+}
+
+.admin-portal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+  overflow-y: auto;
+}
+.polls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.poll {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+.choice {
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  left: 0% !important;
+}
+.votes {
+  margin-left: 100px;
+}
+.choices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 40%;
+}
+
+.create-button {
+  width: 20%;
+  height: 90%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #4caf50 !important;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  left: 39%;
+  top: 8px;
+}
+
+.edit-button {
+  width: 20%;
+  height: 20%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #008cba !important;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  left: 39%;
+  top: 10px;
+}
+
+.delete-button {
+  width: 20%;
+  height: 20%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #f44336 !important;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  left: 39%;
+  top: 10px;
+}
+.charts-button {
+  width: 20%;
+  height: 90%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #4caf50 !important;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
+  position: relative;
+}

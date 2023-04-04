@@ -5,7 +5,8 @@ export const usePollStore = defineStore({
   state: () => ({
     polls: {},
     isCreated: false,
-    poll: {}
+    poll: {},
+    dailyVotes: {}
   }),
   actions: {
     async getPolls(page) {
@@ -18,8 +19,8 @@ export const usePollStore = defineStore({
         }
       )
     },
-    async editPoll(poll) {
-      await axios.put(`http://ahmedatta3322.pythonanywhere.com/api/poll/update/${poll.id}/`, poll, {
+    async editPoll(id, poll) {
+      await axios.put(`http://ahmedatta3322.pythonanywhere.com/api/poll/update/${id}/`, poll, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
         }
@@ -48,6 +49,13 @@ export const usePollStore = defineStore({
     },
     async deletePoll(id) {
       await axios.delete(`http://ahmedatta3322.pythonanywhere.com/api/poll/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+        }
+      })
+    },
+    async getVotesDaily() {
+      this.dailyVotes = await axios.get(`http://ahmedatta3322.pythonanywhere.com/api/votes/daily`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
         }
