@@ -67,7 +67,7 @@ export default {
     vote() {
       axios
         .post(
-          'http://ahmedatta3322.pythonanywhere.com/api/vote/',
+          'https://ahmedatta3322.pythonanywhere.com/api/vote/',
           {
             choice: this.$el.querySelector('input[type="radio"]:checked').value,
             poll: this.poll.id

@@ -10,7 +10,7 @@ export const useAuthStore = defineStore({
   actions: {
     async userLogin(username, password) {
       this.isAuthenticated = await axios.post(
-        'http://ahmedatta3322.pythonanywhere.com/api/login/',
+        'https://ahmedatta3322.pythonanywhere.com/api/login/',
         {
           username: username,
           password: password
@@ -31,7 +31,7 @@ export const useAuthStore = defineStore({
       let token = sessionStorage.getItem('access_token')
       if (token) {
         this.isAuthenticated = (
-          await axios.post('http://ahmedatta3322.pythonanywhere.com/api/verify/', { token: token })
+          await axios.post('https://ahmedatta3322.pythonanywhere.com/api/verify/', { token: token })
         ).status
         if (this.isAuthenticated == 200) {
           this.isAuthenticated = true
@@ -44,7 +44,7 @@ export const useAuthStore = defineStore({
     },
     async userRegister(username, password) {
       this.isAuthenticated = await axios.post(
-        'http://ahmedatta3322.pythonanywhere.com/api/register/',
+        'https://ahmedatta3322.pythonanywhere.com/api/register/',
         {
           username: username,
           password: password,

@@ -11,7 +11,7 @@ export const usePollStore = defineStore({
   actions: {
     async getPolls(page) {
       this.polls = await axios.get(
-        `http://ahmedatta3322.pythonanywhere.com/api/poll/list/?page=${page}`,
+        `https://ahmedatta3322.pythonanywhere.com/api/poll/list/?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
@@ -20,14 +20,14 @@ export const usePollStore = defineStore({
       )
     },
     async editPoll(id, poll) {
-      await axios.put(`http://ahmedatta3322.pythonanywhere.com/api/poll/update/${id}/`, poll, {
+      await axios.put(`https://ahmedatta3322.pythonanywhere.com/api/poll/update/${id}/`, poll, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
         }
       })
     },
     async getPoll(id) {
-      this.poll = await axios.get(`http://ahmedatta3322.pythonanywhere.com/api/poll/view/${id}`, {
+      this.poll = await axios.get(`https://ahmedatta3322.pythonanywhere.com/api/poll/view/${id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
         }
@@ -35,7 +35,7 @@ export const usePollStore = defineStore({
     },
     async createPoll(poll) {
       this.isCreated = await axios
-        .post('http://ahmedatta3322.pythonanywhere.com/api/poll/create/', poll, {
+        .post('https://ahmedatta3322.pythonanywhere.com/api/poll/create/', poll, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
           }
@@ -48,18 +48,21 @@ export const usePollStore = defineStore({
         })
     },
     async deletePoll(id) {
-      await axios.delete(`http://ahmedatta3322.pythonanywhere.com/api/poll/delete/${id}`, {
+      await axios.delete(`https://ahmedatta3322.pythonanywhere.com/api/poll/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
         }
       })
     },
     async getVotesDaily() {
-      this.dailyVotes = await axios.get(`http://ahmedatta3322.pythonanywhere.com/api/votes/daily`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+      this.dailyVotes = await axios.get(
+        `https://ahmedatta3322.pythonanywhere.com/api/votes/daily`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+          }
         }
-      })
+      )
     }
   }
 })
