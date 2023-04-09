@@ -74,8 +74,10 @@ export default {
         }
       } catch (err) {
         if (err.response.status === 400) {
+          this.loader = false
           useToast().error('Username already exists')
         } else {
+          this.loader = false
           useToast().error('Something went wrong')
         }
       }
