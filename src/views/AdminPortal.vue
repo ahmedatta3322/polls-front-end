@@ -7,9 +7,11 @@ import EditForm from '../components/EditForm.vue'
 import '../assets/css/admin.css'
 import { toggleFormUtil } from '../utils.js'
 import { useAuthStore } from '../stores/auth'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 </script>
 <template>
-  <div class="admin-portal">
+  <pulse-loader v-if="loader" color="#3B8070" size="20px" />
+  <div class="admin-portal" v-else>
     <Header />
     <h1>Admin Portal</h1>
     <div class="polls">
@@ -57,6 +59,13 @@ import { useAuthStore } from '../stores/auth'
 <script>
 import { useToast } from 'vue-toast-notification'
 export default {
+  components: {
+    CreateForm,
+    Pagination,
+    Header,
+    EditForm,
+    PulseLoader
+  },
   data() {
     return {
       polls: [],
@@ -64,7 +73,8 @@ export default {
       currentPage: 1,
       selectedPoll: null,
       renderEditForm: false,
-      renderCreateForm: false
+      renderCreateForm: false,
+      loader: true
     }
   },
   methods: {
@@ -80,13 +90,16 @@ export default {
       }
     },
     loadPolls() {
+      this.loader = true
       usePollStore()
         .getPolls(this.currentPage)
         .then(() => {
           this.polls = usePollStore().polls.data.results
           this.totalPages = (usePollStore().polls.data.count / 15).toFixed(0)
+          this.loader = false
         })
         .catch(() => {
+          this.loader = false
           const toast = useToast()
           toast.error("Couldn't load polls")
         })
@@ -101,14 +114,17 @@ export default {
     },
     deletePoll() {
       this.selectedPoll = document.getElementById('poll-id').innerText
+      this.loader = true
       usePollStore()
         .deletePoll(this.selectedPoll)
         .then(() => {
           this.loadPolls()
+          this.loader = false
         })
         .catch(() => {
+          this.loader = false
           const toast = useToast()
-          toast.error("Couldn't delete poll")
+          toast.error("Couldn't delete poll , you are not the owner or poll is expired")
         })
     },
     createPoll() {
@@ -117,9 +133,9 @@ export default {
       this.toggleForm()
     },
     cancelPoll() {
+      this.loadPolls()
       this.renderCreateForm = false
       this.renderEditForm = false
-      this.loadPolls()
     }
   },
   mounted() {

@@ -5,7 +5,8 @@ export const useAuthStore = defineStore({
   state: () => ({
     isAuthenticated: false,
     isAdminAuthenticated: false,
-    loginAsAdmin: false
+    loginAsAdmin: false,
+    loading: false
   }),
   actions: {
     async userLogin(username, password) {
@@ -24,7 +25,7 @@ export const useAuthStore = defineStore({
       } else {
         this.isAuthenticated = false
         let message = this.isAuthenticated.data.detail
-        $toast.error(message)
+        alert(message)
       }
     },
     async verifyAuth() {
@@ -75,6 +76,9 @@ export const useAuthStore = defineStore({
     },
     verifyAdminAuth(isauth) {
       this.isAdminAuthenticated = isauth
+    },
+    setLoader(state) {
+      this.loading = state
     }
   }
 })

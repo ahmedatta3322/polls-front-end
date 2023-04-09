@@ -36,7 +36,6 @@ export default {
       .then(() => {
         for (let i = 0; i < usePollStore().dailyVotes.data.length; i++) {
           this.chartData.labels.push(usePollStore().dailyVotes.data[i].created_at__date)
-          this.chartData.labels.push(66)
           this.chartData.datasets[0].data.push(usePollStore().dailyVotes.data[i].id__count)
         }
         this.loaded = true

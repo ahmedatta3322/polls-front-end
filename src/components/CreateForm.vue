@@ -69,7 +69,7 @@ export default {
         .then(() => {
           this.cancelPoll()
         })
-        .catch((error) => {
+        .catch(() => {
           useToast().error("Couldn't create poll")
         })
     }

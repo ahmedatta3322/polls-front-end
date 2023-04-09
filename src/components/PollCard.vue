@@ -30,7 +30,7 @@
             {{
               isNaN((choice.votes_count / poll.total_votes).toFixed(2) * 100)
                 ? 0
-                : (choice.votes_count / poll.total_votes).toFixed(2) * 100
+                : ((choice.votes_count / poll.total_votes) * 100).toFixed(2)
             }}%
           </div>
         </div>

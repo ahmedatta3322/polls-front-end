@@ -50,9 +50,9 @@ export default {
       setTimeout(() => {
         this.$emit('cancel-poll')
       }, 500)
-      //this.$emit('cancel-poll')
     },
     editPoll(event) {
+      this.loader = true
       event.preventDefault()
       let poll = {
         question: this.question,
@@ -64,7 +64,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.poll.innerHTML)
     this.pollId = this.poll.querySelector('#poll-id').innerHTML
     usePollStore()
       .getPoll(this.pollId)
@@ -73,7 +72,7 @@ export default {
         this.expiration_date = usePollStore().poll.data.expiration_date
         this.choices = usePollStore().poll.data.choices
       })
-      .catch((err) => {
+      .catch(() => {
         useToast().error('Something went wrong')
       })
 

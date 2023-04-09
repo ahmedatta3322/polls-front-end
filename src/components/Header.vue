@@ -7,7 +7,6 @@
 <script>
 import { useAuthStore } from '../stores/auth'
 import '../assets/css/header.css'
-import router from '../router'
 export default {
   methods: {
     logout() {

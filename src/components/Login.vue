@@ -1,5 +1,6 @@
 <template>
-  <div class="login">
+  <pulse-loader v-if="loader" color="#36D7B7" size="16px" />
+  <div class="login" v-else>
     <form @submit.prevent="login">
       <input v-model="username" placeholder="username" />
       <br />
@@ -18,25 +19,32 @@
 import { useAuthStore } from '../stores/auth'
 import '../assets/css/login.css'
 import { useToast } from 'vue-toast-notification'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
+  components: {
+    PulseLoader
+  },
   props: {
     isAdmin: {
       type: Boolean,
-      required: true
+      required: false
     }
   },
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      loader: false
     }
   },
   methods: {
     async login() {
+      this.loader = true
       try {
         await useAuthStore().userLogin(this.username, this.password)
         if (useAuthStore().isAuthenticated) {
+          this.loader = false
           if (useAuthStore().isAdminAuthenticated && this.isAdmin) {
             this.$router.push('/adminportal')
           } else {
@@ -44,6 +52,7 @@ export default {
           }
         }
       } catch (err) {
+        this.loader = false
         if (err.response.status === 401) {
           useToast().error('Invalid username or password')
         } else {
@@ -52,9 +61,11 @@ export default {
       }
     },
     async register() {
+      this.loader = true
       try {
         await useAuthStore().userRegister(this.username, this.password)
         if (useAuthStore().isAuthenticated) {
+          this.loader = false
           if (useAuthStore().isAdminAuthenticated && this.isAdmin) {
             this.$router.push('/adminportal')
           } else {

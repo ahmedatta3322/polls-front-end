@@ -1,14 +1,16 @@
 <script setup>
-import Header from '../components/Header.vue'
+import AppHeader from '../components/Header.vue'
 import PollCard from '../components/PollCard.vue'
 import Pagination from '../components/Pagination.vue'
 import { usePollStore } from '../stores/polls.js'
 import { useToast } from 'vue-toast-notification'
 import '../assets/css/public.css'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 </script>
 <template>
-  <div class="public">
-    <Header />
+  <pulse-loader v-if="loader" color="#3B8070" size="20px" />
+  <div class="public" v-else>
+    <AppHeader />
     <div class="card-container">
       <div class="card-row" v-for="poll in polls" :key="poll.id">
         <PollCard :poll="poll" :is-public="true" />
@@ -26,15 +28,17 @@ import '../assets/css/public.css'
 export default {
   name: 'PublicPortal',
   components: {
-    Header,
+    AppHeader,
     PollCard,
-    Pagination
+    Pagination,
+    PulseLoader
   },
   data() {
     return {
       polls: [],
       totalPages: 0,
-      currentPage: 1
+      currentPage: 1,
+      loader: true
     }
   },
   methods: {
@@ -42,10 +46,12 @@ export default {
       usePollStore()
         .getPolls(this.currentPage)
         .then(() => {
+          this.loader = false
           this.polls = usePollStore().polls.data.results
           this.totalPages = (usePollStore().polls.data.count / 15).toFixed(0)
         })
         .catch(() => {
+          this.loader = false
           const toast = useToast()
           toast.error("Couldn't load polls")
         })
@@ -60,5 +66,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

@@ -20,6 +20,7 @@
     "vue-ctk-date-time-picker": "^3.0.0-alpha.0",
     "vue-date-pick": "^1.5.1",
     "vue-router": "^4.1.6",
+    "vue-spinner": "^1.0.4",
     "vue-toast-notification": "3.0",
     "vuetable-2": "^2.0.0-beta.4"
   },
