@@ -1,14 +1,14 @@
 <template>
   <pulse-loader v-if="loader" color="#36D7B7" size="16px" />
   <div class="login" v-else>
-    <form @submit.prevent="login">
-      <input v-model="username" placeholder="username" />
+    <form @submit="login">
+      <input v-model="username" placeholder="username" required />
       <br />
       <br />
-      <input v-model="password" placeholder="password" type="password" />
+      <input v-model="password" placeholder="password" type="password" required />
       <br />
       <br />
-      <button type="button" @click="login">Login</button>
+      <button type="submit">Login</button>
       <button type="button" @click="register">Register</button>
     </form>
     <a v-if="isAdmin" href="/login" class="nav-link">User Login</a>
@@ -39,7 +39,8 @@ export default {
     }
   },
   methods: {
-    async login() {
+    async login(e) {
+      e.preventDefault()
       this.loader = true
       try {
         await useAuthStore().userLogin(this.username, this.password)
@@ -60,7 +61,15 @@ export default {
         }
       }
     },
-    async register() {
+    async register(e) {
+      // get the form to report validation errors
+      const form = e.target.form
+      if (!form.checkValidity()) {
+        // if the form is invalid, submit it. The browser will
+        // display native HTML5 errors.
+        form.reportValidity()
+        return
+      }
       this.loader = true
       try {
         await useAuthStore().userRegister(this.username, this.password)
